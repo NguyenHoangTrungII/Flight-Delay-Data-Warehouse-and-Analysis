@@ -1,0 +1,103 @@
+﻿<DeploymentSnapshot xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0">
+  <Target>
+    <Database>SSAS_OLAB</Database>
+    <Server>DESKTOP-7CD54AP\MSSQLSERVER2022</Server>
+    <ConnectionString>Data Source=DESKTOP-7CD54AP\MSSQLSERVER2022;Timeout=0</ConnectionString>
+  </Target>
+  <Options>
+    <TransactionalDeployment>false</TransactionalDeployment>
+    <PartitionDeployment>DeployPartitions</PartitionDeployment>
+    <RoleDeployment>DeployRolesRetainMembers</RoleDeployment>
+    <ProcessingOption>Default</ProcessingOption>
+    <OutputScript></OutputScript>
+    <ImpactAnalysisFile></ImpactAnalysisFile>
+    <ConfigurationSettingsDeployment>Deploy</ConfigurationSettingsDeployment>
+    <OptimizationSettingsDeployment>Deploy</OptimizationSettingsDeployment>
+    <WriteBackTableCreation>UseExisting</WriteBackTableCreation>
+  </Options>
+  <Snapshot>
+    <ObjectSnapshots>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.RelationalDataSource</Type>
+        <TimeStamp>UqB8G7Gd6H+Jav3pmW6wv5YGzkU=5/24/2023 4:17:48 PM5/24/2023 4:17:48 PM</TimeStamp>
+        <ID>
+          <String>US Air Line Olab</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.DataSourceView</Type>
+        <TimeStamp>Mdz0oBpjy7pfn3yfNrEhd628H0M=5/24/2023 4:18:11 PM5/24/2023 4:18:11 PM</TimeStamp>
+        <ID>
+          <String>US Air Line Olab SSAS</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>Lum7r1oUs/NzcYrDkOb/RfstPJA=5/24/2023 4:18:26 PM5/24/2023 4:18:26 PM</TimeStamp>
+        <ID>
+          <String>Dim Station</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>ViJk2xbeoP+qBl4ILgrz3veIzAU=5/24/2023 4:18:41 PM5/24/2023 4:18:41 PM</TimeStamp>
+        <ID>
+          <String>Dim FL Date</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>fYFZKl4QO7hSB3GBjRVd+tp2HvA=5/26/2023 1:58:34 AM5/24/2023 4:18:55 PM</TimeStamp>
+        <ID>
+          <String>Dim OP Carrier</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>/EtDIYVxYkSgIvhi+3Q0cOqFnJ4=5/26/2023 1:58:34 AM5/24/2023 4:19:11 PM</TimeStamp>
+        <ID>
+          <String>Dim MKT Carrier</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>3Zoo8x5rF3XUsZTjfmjbtOi6DAY=5/24/2023 4:19:23 PM5/24/2023 4:19:23 PM</TimeStamp>
+        <ID>
+          <String>Dim Active Weather</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>hzAjvOksPfE7rncpoRTgwkoCDW0=5/24/2023 4:19:37 PM5/24/2023 4:19:37 PM</TimeStamp>
+        <ID>
+          <String>Dim Cancellation</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>Gqq4a1wmOoJXHclujdaOSvtRUxE=5/24/2023 4:20:07 PM5/24/2023 4:20:07 PM</TimeStamp>
+        <ID>
+          <String>Fact</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Cube</Type>
+        <TimeStamp>tnq3S3+yCn0cmoiAmk3KaWcIqdU=6/15/2023 5:41:44 PM5/24/2023 4:20:07 PMXV7WBypX5U0Z/gFEmT/wGuYHLF4=5/28/2023 7:12:08 PM5/24/2023 4:20:07 PM</TimeStamp>
+        <ID>
+          <String>US Air Line Olab SSAS 2</String>
+        </ID>
+      </ObjectSnapshot>
+    </ObjectSnapshots>
+    <DatabaseSnapshot>
+      <Type>Microsoft.AnalysisServices.Database</Type>
+      <TimeStamp>DvOtXxt/bVqX+ktp2q+wPCU8kcQ=5/21/2023 5:43:06 PM5/21/2023 5:43:06 PM</TimeStamp>
+      <ID>
+        <String>SSAS_OLAB</String>
+      </ID>
+    </DatabaseSnapshot>
+    <Granularity>Coarse</Granularity>
+  </Snapshot>
+  <AssemblyLocations />
+  <ProcessingComplete>true</ProcessingComplete>
+  <LastDeployed>2023-06-15T10:41:45.04Z</LastDeployed>
+</DeploymentSnapshot>

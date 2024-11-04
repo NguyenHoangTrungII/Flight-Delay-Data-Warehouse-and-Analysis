@@ -1,0 +1,184 @@
+﻿
+// 1.	Liệt kê số chuyến bay bị hủy do thời tiết xấu của từng hãng bay trong năm 2022 
+//-c1:
+SELECT
+  NON EMPTY { [Measures].[Fact Count] } ON COLUMNS,
+  NON EMPTY {
+    (
+      [Dim MKT Carrier].[MKT UNIQUE CARRIER].[MKT UNIQUE CARRIER].ALLMEMBERS *
+      [Dim Cancellation].[CANCELLATION REASON].[CANCELLATION REASON].ALLMEMBERS *
+      [Dim Active Weather].[WEATHER DESCRIPTION].[WEATHER DESCRIPTION].ALLMEMBERS
+    )
+  }  ON ROWS
+FROM [US Air Line Olab SSAS 2]
+WHERE (
+  [Dim Cancellation].[STATUS CANCEL].&[2],
+  [Dim Active Weather].[ACTIVE WEATHER].&[2]
+);
+
+//c2:
+SELECT
+  NON EMPTY { [Measures].[Fact Count] } ON COLUMNS,
+  NON EMPTY CrossJoin(
+    [Dim MKT Carrier].[MKT UNIQUE CARRIER].[MKT UNIQUE CARRIER].ALLMEMBERS,
+    CrossJoin(
+      [Dim Cancellation].[CANCELLATION REASON].[CANCELLATION REASON].ALLMEMBERS,
+      [Dim Active Weather].[WEATHER DESCRIPTION].[WEATHER DESCRIPTION].ALLMEMBERS
+    )
+  )  ON ROWS
+FROM [US Air Line Olab SSAS 2]
+WHERE (
+  [Dim Cancellation].[STATUS CANCEL].&[2],
+  [Dim Active Weather].[ACTIVE WEATHER].&[2]
+);
+
+
+
+//2.	Liệt kê tổng số lần hủy chuyến của từng lý do hủy chuyến của tất cả hãng hàng không 
+
+
+SELECT
+  [Measures].[Fact Count] ON COLUMNS,
+  NON EMPTY [Dim Cancellation].[CANCELLATION REASON].[CANCELLATION REASON].ALLMEMBERS
+  DIMENSION PROPERTIES MEMBER_CAPTION, MEMBER_UNIQUE_NAME ON ROWS
+FROM [US Air Line Olab SSAS 2]
+WHERE (
+  FILTER(
+    [Dim Cancellation].[STATUS CANCEL].ALLMEMBERS,
+    [Dim Cancellation].[STATUS CANCEL].CurrentMember.Properties("Key") <> "0"
+  )
+);
+
+//3.	Tổng số chuyến bay trong trong từng tháng của tất cả các hãng hàng không 
+ SELECT NON EMPTY { [Measures].[Fact Count] } ON COLUMNS, 
+ NON EMPTY { ([Dim MKT Carrier].[MKT UNIQUE CARRIER].[MKT UNIQUE CARRIER].ALLMEMBERS * 
+ [Dim FL Date].[Month FL Date].[Month FL Date].ALLMEMBERS ) } ON ROWS 
+ FROM [US Air Line Olab SSAS 2] ;
+
+ //4.	Liệt kê số lượng chuyến bay đến được tiếp nhận của các tiểu bang,
+ //xếp theo thứ tự giảm dần
+  SELECT NON EMPTY { [Measures].[Fact Count] } ON COLUMNS, 
+  NON EMPTY { ([DES DEST STATION BY FLIGHT COUNT] ) }  ON ROWS 
+ FROM [US Air Line Olab SSAS 2];
+
+ //5.	Liệt kê các hãng hàng không mở bán vé chuyến bay nhiều nhất.
+  SELECT NON EMPTY { [Measures].[Fact Count] } ON COLUMNS, 
+  NON EMPTY { ([Dim MKT Carrier].[MKT UNIQUE CARRIER].[MKT UNIQUE CARRIER].ALLMEMBERS ) }  ON ROWS 
+  FROM [US Air Line Olab SSAS 2] ;
+
+  //6.	Top các ngày có lượt chuyến bay  nhiều nhất
+  SELECT NON EMPTY { [Measures].[Fact Count] } ON COLUMNS, 
+  NON EMPTY { TOPCOUNT(
+   [Dim FL Date].[FL DATE].[FL DATE].Members,
+     10,
+    [Measures].[Fact Count]
+	) }  ON ROWS 
+  FROM [US Air Line Olab SSAS 2] ;
+  
+ //7.	Top 10 sân bay có số lượng chuyến bay khởi hành nhiều nhất 
+ //(lưu ý phải là tuyến bay không bị hủy bỏ)
+
+SELECT
+  NON EMPTY {[Measures].[Fact Count]} ON COLUMNS,
+  NON EMPTY {
+    (
+      TOPCOUNT(
+        [ORIGIN].[AIRPORT].[AIRPORT].MEMBERS, 10, [Measures].[Fact Count]
+      ) * [ORIGIN].[DISPLAY AIRPORT NAME].[DISPLAY AIRPORT NAME].ALLMEMBERS 
+    )
+  } ON ROWS
+FROM [US Air Line Olab SSAS 2]
+WHERE  {[Dim Cancellation].[STATUS CANCEL].&[0]};
+
+
+//8.	Từ top 10 sân bay phổ biến nhất, tiến hàng chọn 10 tuyến bay phổ biến nhất 
+//từ tất cả các chuyến bay của 10 hãng hàng không đó trong năm 2022
+
+
+WITH SET [TOP 10 POPULAR  STATION]
+ AS TOPCOUNT(
+    [ORIGIN].[AIRPORT].[AIRPORT].MEMBERS ,
+    10,
+    [Measures].[Fact Count]
+  ) 
+  
+  SET [GETROUTES] AS
+  CrossJoin(
+    [TOP 10 POPULAR  STATION],
+    [DEST].[AIRPORT].[AIRPORT].MEMBERS 
+  )
+
+  SET [TOP 10 ROUTES] AS
+  TOPCOUNT(
+    [CombinedSet],
+    10,
+    [Measures].[Fact Count]
+  )
+
+  SELECT
+  [Measures].[Fact Count] ON COLUMNS,
+  [TOP 10 ROUTES] ON ROWS
+FROM [US Air Line Olab SSAS 2];
+
+//9.	Liệt kê tất cả chuyến bay của hãng hãng không từ sân bay ABE, 
+//nếu tuyến bay nào từ ABE có chuyến bay lớn hơn 100 thì đây là ‘Tuyến bay phổ biến’, 
+//ngược lạ là tuyến bay không phổ biến.
+
+//c1
+WITH MEMBER [Measures].[Total Flights] AS [Measures].[Fact Count]
+
+SELECT
+  NON EMPTY {[Measures].[TypeofFlightRoutes], [Measures].[Total Flights]} ON COLUMNS,
+  NON EMPTY {[ORIGIN].[AIRPORT].[AIRPORT].ALLMEMBERS * [DEST].[AIRPORT].[AIRPORT].ALLMEMBERS}  ON ROWS
+FROM (
+  SELECT
+    (-{[DEST].[AIRPORT].&[ABE], [DEST].[AIRPORT].[All].UNKNOWNMEMBER}) ON COLUMNS
+  FROM (
+    SELECT
+      {[ORIGIN].[AIRPORT].&[ABE]} ON COLUMNS
+    FROM [US Air Line Olab SSAS 2]
+  )
+)
+;
+
+//c2
+WITH MEMBER [Measures].[Total Flights] AS [Measures].[Fact Count]
+
+
+SELECT
+	NON EMPTY {[Measures].[TypeofFlightRoutes], [Measures].[Fact Count]} ON COLUMNS,
+	NON EMPTY 
+	CrossJoin(
+			{[ORIGIN].[AIRPORT].&[ABE]},
+			Except(NONEMPTY([DEST].[AIRPORT].[AIRPORT].ALLMEMBERS, {[Measures].[TypeofFlightRoutes], [Measures].[Fact Count]}),
+			{[DEST].[AIRPORT].&[ABE], [DEST].[AIRPORT].[All].UNKNOWNMEMBER}
+			)
+	) ON ROWS
+FROM [US Air Line Olab SSAS 2];
+
+//c3 - đc dung trong bao cao docx
+SELECT
+	NON EMPTY {[Measures].[TypeofFlightRoutes], [Measures].[Fact Count]} ON COLUMNS,
+	NON EMPTY 
+	CrossJoin(
+			{[ORIGIN].[AIRPORT].&[ABE]},
+			Except(NONEMPTY([DEST].[AIRPORT].[AIRPORT].ALLMEMBERS),
+			{[DEST].[AIRPORT].&[ABE], [DEST].[AIRPORT].[All].UNKNOWNMEMBER}
+			)
+	) ON ROWS
+FROM [US Air Line Olab SSAS 2];
+
+
+//10.	 Liệt kê tháng có số lượng chuyến bay lớn nhất của mỗi hãng hàng không
+
+ WITH MEMBER [Measures].[MonthMaxFlightCountByCarrier]
+ AS TopCount(
+      [Dim FL Date].[Month FL Date].[Month FL Date].Members,
+      1,
+      [Measures].[Fact Count]
+    ).Item(0).Name
+
+ SELECT { [Measures].[MonthMaxFlightCountByCarrier] } ON COLUMNS, 
+ { ([Dim MKT Carrier].[MKT UNIQUE CARRIER].[MKT UNIQUE CARRIER].ALLMEMBERS ) }  ON ROWS 
+ FROM [US Air Line Olab SSAS 2] ;
+

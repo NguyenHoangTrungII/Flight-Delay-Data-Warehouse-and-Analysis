@@ -1,0 +1,227 @@
+﻿<Dimension xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="0002e7d4-0b61-4e76-bd0f-de4690a4d29a" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+  <ID>Fact</ID>
+  <Name>Fact</Name>
+  <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+  <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+  <Annotations>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramLayout</Name>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowFriendlyNames</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowRelationshipNames</Name>
+      <Value>false</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:UseDiagramDefaultLayout</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortLeft</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortTop</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingLeft</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingTop</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramZoom</Name>
+      <Value>100</Value>
+    </Annotation>
+  </Annotations>
+  <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+  <State>Unprocessed</State>
+  <Source xsi:type="DataSourceViewBinding" dwd:design-time-name="8d2c8a35-de80-481b-8b38-255c334d71b2">
+    <DataSourceViewID>US Air Line Olab SSAS</DataSourceViewID>
+  </Source>
+  <ErrorConfiguration dwd:design-time-name="365f764d-feda-45f3-af67-6dc451b36f34">
+    <KeyNotFound>ReportAndStop</KeyNotFound>
+    <KeyDuplicate>ReportAndStop</KeyDuplicate>
+    <NullKeyNotAllowed>ReportAndStop</NullKeyNotAllowed>
+  </ErrorConfiguration>
+  <CurrentStorageMode>Molap</CurrentStorageMode>
+  <Attributes>
+    <Attribute dwd:design-time-name="fd0bedca-0c60-4b51-b888-70e9683f00a0">
+      <ID>Id</ID>
+      <Name>Id</Name>
+      <Usage>Key</Usage>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="73418cb3-a595-4dde-8b48-1b2c7eb3a235">
+          <DataType>Integer</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="e034837c-cc99-4ff4-b198-3e8b9e1e0d8f">
+            <TableID>dbo_Fact</TableID>
+            <ColumnID>id</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <AttributeRelationships>
+        <AttributeRelationship dwd:design-time-name="1143cfc7-5ddc-48b9-a5a4-58e29fd92af8">
+          <AttributeID>FL DATE</AttributeID>
+          <Name>FL DATE</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="46673e06-627a-4f32-9855-cfa01a7b3830">
+          <AttributeID>ACTIVE WEATHER</AttributeID>
+          <Name>ACTIVE WEATHER</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="46f4b85b-39a6-48cc-ba1e-0e53e28f17b7">
+          <AttributeID>CANCELLED</AttributeID>
+          <Name>CANCELLED</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="56d0e820-f928-4d79-bc13-786d9c2626e9">
+          <AttributeID>ID OP CARRIER</AttributeID>
+          <Name>ID OP CARRIER</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="37123d36-36b2-4685-b389-0cc24e3c09e5">
+          <AttributeID>ORIGIN</AttributeID>
+          <Name>ORIGIN</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="a0d9204c-f341-4f4d-9c16-52ab065d9ef1">
+          <AttributeID>DEST</AttributeID>
+          <Name>DEST</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="9d11d89b-2e46-47ef-8277-f29283ca3457">
+          <AttributeID>ID MKT CARRIER</AttributeID>
+          <Name>ID MKT CARRIER</Name>
+        </AttributeRelationship>
+      </AttributeRelationships>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="cb5f9c72-4cf1-4738-8e48-3a506a25d664">
+      <ID>FL DATE</ID>
+      <Name>FL DATE</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="0bba6927-b8dd-427c-8c94-87f5e93f74c4">
+          <DataType>WChar</DataType>
+          <DataSize>50</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="3e927d45-a0a0-474e-966b-79455883d6bd">
+            <TableID>dbo_Fact</TableID>
+            <ColumnID>FL_DATE</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <AttributeHierarchyVisible>false</AttributeHierarchyVisible>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="f1c7c792-f447-4f27-b150-e41f31bd1edf">
+      <ID>ACTIVE WEATHER</ID>
+      <Name>ACTIVE WEATHER</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="bd5e4eb8-33cb-4748-8096-56277de2c4f2">
+          <DataType>WChar</DataType>
+          <DataSize>50</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="201cb746-6d6a-4133-b05a-ac7b13e93e14">
+            <TableID>dbo_Fact</TableID>
+            <ColumnID>ACTIVE_WEATHER</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <AttributeHierarchyVisible>false</AttributeHierarchyVisible>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="167a997e-1a2f-4c1a-b4e9-3783ce8e8479">
+      <ID>CANCELLED</ID>
+      <Name>CANCELLED</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="43c5350f-2fe0-4051-8894-b2ce27b9b764">
+          <DataType>Integer</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="87d034bb-abb0-4d2d-a413-6d534732ca4c">
+            <TableID>dbo_Fact</TableID>
+            <ColumnID>CANCELLED</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <AttributeHierarchyVisible>false</AttributeHierarchyVisible>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="50d8ee99-8791-4615-b458-d6addcebec7e">
+      <ID>ID OP CARRIER</ID>
+      <Name>ID OP CARRIER</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="27510141-5554-42c3-9b79-61e417502140">
+          <DataType>Integer</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="9947356c-1dba-4604-8421-5f59794ba120">
+            <TableID>dbo_Fact</TableID>
+            <ColumnID>ID_OP_CARRIER</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <AttributeHierarchyVisible>false</AttributeHierarchyVisible>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="77ad9daa-5767-4f49-8889-72d38b099ee5">
+      <ID>ORIGIN</ID>
+      <Name>ORIGIN</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="4079c06c-edba-4871-a2f6-d8d630a7e1fe">
+          <DataType>WChar</DataType>
+          <DataSize>50</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="81e77dc6-1888-4cf5-9222-59c2b0cfb8b8">
+            <TableID>dbo_Fact</TableID>
+            <ColumnID>ORIGIN</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <AttributeHierarchyVisible>false</AttributeHierarchyVisible>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="08fac078-0f5f-456d-931f-4bb828c509d2">
+      <ID>DEST</ID>
+      <Name>DEST</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="ae57cfa8-bcfd-404c-971a-5cc123eb3a38">
+          <DataType>WChar</DataType>
+          <DataSize>50</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="28907c0c-d4e3-42b6-bef3-559a9fc92404">
+            <TableID>dbo_Fact</TableID>
+            <ColumnID>DEST</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <AttributeHierarchyVisible>false</AttributeHierarchyVisible>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="50c675e3-a137-40eb-bd7b-8f34227cbc71">
+      <ID>ID MKT CARRIER</ID>
+      <Name>ID MKT CARRIER</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="14053199-a46b-4a80-8164-a371307e6655">
+          <DataType>Integer</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="92c7da0a-f9b6-4049-8b47-05c174c3b434">
+            <TableID>dbo_Fact</TableID>
+            <ColumnID>ID_MKT_CARRIER</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <AttributeHierarchyVisible>false</AttributeHierarchyVisible>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+  </Attributes>
+  <ddl300:ProcessingState>Unprocessed</ddl300:ProcessingState>
+</Dimension>
